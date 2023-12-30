@@ -5,7 +5,7 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
     cors: {
-        origin: "*"
+        origin: process.env.ORIGIN
     }
 });
 const rooms = new Map(); // To store game rooms
@@ -79,7 +79,7 @@ io.on("connection", socket => {
         console.log("A user disconnected");
     });
 });
-
-server.listen(8000, () => {
-    console.log("Server is running on port 8000");
+const PORT=process.env.PORT || 8000
+server.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
 });
